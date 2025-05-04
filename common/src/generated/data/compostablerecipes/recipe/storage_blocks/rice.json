@@ -1,0 +1,16 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:storage_blocks/rice"
+      ]
+    }
+  ],
+  "type": "compostablerecipes:compostable",
+  "chance": 1.0,
+  "ingredient": {
+    "tag": "c:storage_blocks/rice"
+  }
+}

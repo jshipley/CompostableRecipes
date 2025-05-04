@@ -1,0 +1,7 @@
+{
+  "type": "compostablerecipes:compostable",
+  "chance": 1.0,
+  "ingredient": {
+    "tag": "c:foods/pie"
+  }
+}

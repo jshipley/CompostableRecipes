@@ -1,0 +1,8 @@
+{
+  "type": "compostablerecipes:compostable",
+  "chance": 0.5,
+  "ingredient": {
+    "tag": "c:crops/cactus"
+  },
+  "weight": 2
+}

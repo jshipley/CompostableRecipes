@@ -1,0 +1,16 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
+      "values": [
+        "c:common/grass_like"
+      ]
+    }
+  ],
+  "type": "compostablerecipes:compostable",
+  "chance": 0.3,
+  "ingredient": {
+    "tag": "c:grass_like"
+  }
+}
