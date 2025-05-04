@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "compostablerecipes",
+  "version": "${version}",
+  "name": "Compostable Recipes",
+  "description": "Adds a new recipe that adds items to the composter",
+  "authors": [
+    "jship"
+  ],
+  "contact": {
+    "homepage": "https://amertune.neocities.org/",
+    "sources": "https://github.com/jshipley/CompostableRecipes"
+  },
+  "license": "MIT",
+  "icon": "assets/compostablerecipes/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.jship.compostablerecipes.fabric.CompostableRecipesFabric"
+    ],
+    "fabric-datagen": [
+      "com.jship.compostablerecipes.datagen.CRDataGenerator"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "compostablerecipes:compostable",
+  "chance": 0.65,
+  "ingredient": {
+    "tag": "minecraft:tall_flowers"
+  },
+  "weight": 2
+}
