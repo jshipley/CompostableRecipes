@@ -11,6 +11,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -21,6 +22,7 @@ public final class CompostableRecipes {
 
     public static Supplier<RecipeType<CompostableRecipe>> COMPOSTABLE_RECIPE;
     public static Supplier<RecipeSerializer<CompostableRecipe>> COMPOSTABLE_RECIPE_SERIALIZER;
+    public static Supplier<RecipeBookCategory> COMPOSTABLE_CATEGORY;
 
     // original chance, current weight. Used for undoing changes that this mod made
     // to composter while leaving vanilla or other mod changes in place
@@ -35,9 +37,11 @@ public final class CompostableRecipes {
     public static void loadRecipes(MinecraftServer server) {
         resetComposter();
 
-        for (var recipeHolder : server.getRecipeManager().getAllRecipesFor(COMPOSTABLE_RECIPE.get())) {
-            addToComposter(recipeHolder.value());
-        }
+        server.getRecipeManager().getRecipes()
+            .stream().filter((recipe) -> recipe.value().getType() == CompostableRecipes.COMPOSTABLE_RECIPE.get())
+            .forEach(recipeHolder -> {
+            addToComposter((CompostableRecipe)recipeHolder.value());
+        });
 
         LOGGER.info("{} items added to composter", ADDED_ITEMS.size());
     }
@@ -54,8 +58,8 @@ public final class CompostableRecipes {
     }
 
     private static void addToComposter(CompostableRecipe recipe) {
-        for (var stack : recipe.ingredient().getItems())
-            addToComposter(stack.getItem(), recipe.chance(), recipe.weight());
+        recipe.ingredient().items().forEach(itemHolder ->
+            addToComposter(itemHolder.value(), recipe.chance(), recipe.weight()));
     }
 
     private static void addToComposter(Item item, float chance, int weight) {

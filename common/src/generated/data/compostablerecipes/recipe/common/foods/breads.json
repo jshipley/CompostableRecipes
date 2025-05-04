@@ -1,7 +1,5 @@
 {
   "type": "compostablerecipes:compostable",
   "chance": 0.85,
-  "ingredient": {
-    "tag": "c:foods/bread"
-  }
+  "ingredient": "#c:foods/bread"
 }

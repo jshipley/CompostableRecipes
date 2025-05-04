@@ -9,33 +9,25 @@ import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 
 public record CompostableRecipe(Ingredient ingredient, float chance, int weight) implements Recipe<SingleRecipeInput> {
 
-    public CompostableRecipe(ItemLike item, float chance) {
-        this(Ingredient.of(item), chance, 1);
+    public CompostableRecipe(Ingredient ingredient, float chance) {
+        this(ingredient, chance, 1);
     }
 
-    public CompostableRecipe(ItemLike item, float chance, int weight) {
-        this(Ingredient.of(item), chance, weight);
-    }
-
-    public CompostableRecipe(TagKey<Item> tag, float chance) {
-        this(Ingredient.of(tag), chance, 1);
-    }
-
-    public CompostableRecipe(TagKey<Item> tag, float chance, int weight) {
-        this(Ingredient.of(tag), chance, weight);
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return CompostableRecipes.COMPOSTABLE_CATEGORY.get();
     }
 
     @Override
@@ -44,22 +36,12 @@ public record CompostableRecipe(Ingredient ingredient, float chance, int weight)
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return false;
-    }
-
-    @Override
-    public ItemStack getResultItem(Provider registries) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends Recipe<SingleRecipeInput>> getSerializer() {
         return CompostableRecipes.COMPOSTABLE_RECIPE_SERIALIZER.get();
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public RecipeType<? extends Recipe<SingleRecipeInput>> getType() {
         return CompostableRecipes.COMPOSTABLE_RECIPE.get();
     }
 
@@ -68,12 +50,17 @@ public record CompostableRecipe(Ingredient ingredient, float chance, int weight)
         return ingredient.test(input.item());
     }
 
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.create(ingredient);
+    }
+
     public static class Serializer implements RecipeSerializer<CompostableRecipe> {
 
         public static final MapCodec<CompostableRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance
                 .group(
-                    Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(CompostableRecipe::ingredient),
+                    Ingredient.CODEC.fieldOf("ingredient").forGetter(CompostableRecipe::ingredient),
                     Codec.FLOAT.fieldOf("chance").forGetter(CompostableRecipe::chance),
                     Codec.INT.optionalFieldOf("weight", 1).forGetter(CompostableRecipe::weight)
                 )

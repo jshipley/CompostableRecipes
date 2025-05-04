@@ -1,7 +1,5 @@
 {
   "type": "compostablerecipes:compostable",
   "chance": 0.3,
-  "ingredient": {
-    "tag": "minecraft:flowers"
-  }
+  "ingredient": "#minecraft:flowers"
 }

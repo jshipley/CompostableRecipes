@@ -1,8 +1,6 @@
 {
   "type": "compostablerecipes:compostable",
   "chance": 0.65,
-  "ingredient": {
-    "tag": "c:crops/pumpkin"
-  },
+  "ingredient": "#c:crops/pumpkin",
   "weight": 2
 }

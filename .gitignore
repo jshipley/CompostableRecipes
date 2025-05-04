@@ -6,3 +6,5 @@ common/run/
 fabric/build/
 fabric/run/
 build/
+
+.architecury-transformer/

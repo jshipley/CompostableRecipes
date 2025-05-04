@@ -29,6 +29,8 @@ or with a tag:
 }
 ````
 
+In 1.21.5, the ingredient format changed. Instead of `"ingredient": { "item": "minecraft:item" }` it's just `"ingredient": "minecraft:item"` or `"ingredient": "#minecraft:tag"`
+
 There's also an optional "weight" key that can be used to set a recipe's weight. This is mostly for conflict resolution. For example, if "c:crops" have a weight of 1 and "c:crops/pumpkin" has a weight of 2 then the chance value for pumpkins will be from the "c:crops/pumpkin" tag.
 
 All vanilla compostable items have a default weight of 10, so if you want to change those values you can add a new recipe with a weight higher than 10.

@@ -1,7 +1,5 @@
 {
   "type": "compostablerecipes:compostable",
   "chance": 0.3,
-  "ingredient": {
-    "tag": "c:foods/vegetable"
-  }
+  "ingredient": "#c:foods/vegetable"
 }

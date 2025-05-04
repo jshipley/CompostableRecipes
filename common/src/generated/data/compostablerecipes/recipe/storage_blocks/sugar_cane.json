@@ -4,11 +4,11 @@
       "condition": "fabric:tags_populated",
       "registry": "minecraft:item",
       "values": [
-        "c:common/grass"
+        "c:storage_blocks/sugar_cane"
       ]
     }
   ],
   "type": "compostablerecipes:compostable",
-  "chance": 0.3,
-  "ingredient": "#c:grass"
+  "chance": 1.0,
+  "ingredient": "#c:storage_blocks/sugar_cane"
 }
